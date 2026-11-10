@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../pages/LoginPage.js');
-const { SearchHotelPage } = require('../pages/SearchHotelPage.js');
-const { SelectHotelPage } = require('../pages/SelectHotelPage.js');
+const { LoginPage } = require('../../pages/LoginPage.js');
+const { SearchHotelPage } = require('../../pages/SearchHotelPage.js');
+const { SelectHotelPage } = require('../../pages/Select_hotel_page.js');
 
 test('Select Hotel Test', async ({ page }) => {
   const loginPage = new LoginPage(page);
@@ -19,7 +19,7 @@ test('Select Hotel Test', async ({ page }) => {
   await searchPage.searchHotel();
 
   // Step 3: Select Hotel
-  await expect(selectPage.continueButton).toBeEnabled();
+  await  expect(selectPage.continueButton).toBeEnabled()
   await selectPage.selectHotel();
 
   // Assertions: Verify navigation to Book A Hotel page
