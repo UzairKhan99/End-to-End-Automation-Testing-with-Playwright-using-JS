@@ -1,5 +1,8 @@
 const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../../pages/LoginPage.js'); // Use '../pages/LoginPage.js' if file is directly in tests/
+const { LoginPage } = require('../../pages/LoginPage.js');
+const { registerFailureScreenshot } = require('../helpers/authHooks.js');
+
+registerFailureScreenshot(test);
 
 test('Negative Test - Login with invalid username/password', async ({ page }) => {
   const loginPage = new LoginPage(page);
