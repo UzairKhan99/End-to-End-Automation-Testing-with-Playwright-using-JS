@@ -1,15 +1,14 @@
 const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../../pages/LoginPage.js');
 const { SearchHotelPage } = require('../../pages/SearchHotelPage.js');
 const hotelScenarios = require('../../test-data/hotel.json');
 const { getFutureHotelDates } = require('../../utils/dateUtils.js');
-const { getAdactinCredentials } = require('../../utils/envUtils.js');
+const { registerLoginBeforeEach } = require('../helpers/authHooks.js');
+
+registerLoginBeforeEach(test);
 
 for (const hotelScenario of hotelScenarios) {
   test(hotelScenario.testName, async ({ page }) => {
-    const loginPage = new LoginPage(page);
     const searchPage = new SearchHotelPage(page);
-    const { username, password } = getAdactinCredentials();
     const dates = getFutureHotelDates(
       hotelScenario.checkIn.daysFromToday,
       hotelScenario.checkOut.stayLength
@@ -23,9 +22,6 @@ for (const hotelScenario of hotelScenarios) {
       checkOut: dates.checkOut,
       adults: hotelScenario.adults
     };
-
-    await loginPage.open();
-    await loginPage.login(username, password);
 
     await expect(searchPage.searchButton).toBeEnabled();
     await searchPage.searchHotel(searchData);

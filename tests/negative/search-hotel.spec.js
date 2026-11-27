@@ -1,15 +1,12 @@
 const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../../pages/LoginPage.js');
 const { SearchHotelPage } = require('../../pages/SearchHotelPage.js');
-const { getAdactinCredentials } = require('../../utils/envUtils.js');
+const { registerLoginBeforeEach } = require('../helpers/authHooks.js');
+
+registerLoginBeforeEach(test);
 
 test('Negative Test - Search Hotel without selecting mandatory fields', async ({ page }) => {
-  const loginPage = new LoginPage(page);
   const searchPage = new SearchHotelPage(page);
-  const { username, password } = getAdactinCredentials();
 
-  await loginPage.open();
-  await loginPage.login(username, password);
   await expect(page).toHaveURL(/SearchHotel\.php/);
 
   await searchPage.searchButton.click();

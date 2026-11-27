@@ -1,18 +1,17 @@
 const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../../pages/LoginPage.js');
 const { SearchHotelPage } = require('../../pages/SearchHotelPage.js');
 const { SelectHotelPage } = require('../../pages/Select_hotel_page.js');
 const hotelScenarios = require('../../test-data/hotel.json');
 const { getFutureHotelDates } = require('../../utils/dateUtils.js');
-const { getAdactinCredentials } = require('../../utils/envUtils.js');
+const { registerLoginBeforeEach } = require('../helpers/authHooks.js');
+
+registerLoginBeforeEach(test);
 
 test('Select Hotel Test', async ({ page }) => {
-  const loginPage = new LoginPage(page);
   const searchPage = new SearchHotelPage(page);
   const selectPage = new SelectHotelPage(page);
   const hotelScenario = hotelScenarios[0];
 
-  const { username, password } = getAdactinCredentials();
   const dates = getFutureHotelDates(
     hotelScenario.checkIn.daysFromToday,
     hotelScenario.checkOut.stayLength
@@ -27,14 +26,8 @@ test('Select Hotel Test', async ({ page }) => {
     adults: hotelScenario.adults
   };
 
-  // Step 1: Login
-  await loginPage.open();
-  await loginPage.login(username, password);
-
-  // Step 2: Search Hotel
   await searchPage.searchHotel(searchData);
 
-  // Step 3: Select Hotel
   await  expect(selectPage.continueButton).toBeEnabled()
   await selectPage.selectHotel();
 
