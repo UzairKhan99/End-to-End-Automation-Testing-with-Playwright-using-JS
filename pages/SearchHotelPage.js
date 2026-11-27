@@ -11,14 +11,14 @@
     this.searchButton = page.locator('#Submit');
   }
 
-  async searchHotel() {
-    await this.location.selectOption({ label: 'Sydney' });
-    await this.hotel.selectOption({ index: 1 });
-    await this.roomType.selectOption({ index: 1 });
-    await this.numberOfRooms.selectOption({ index: 1 });
-    await this.checkInDate.fill('15/11/2026');
-    await this.checkOutDate.fill('16/11/2026');
-    await this.adultsPerRoom.selectOption({ index: 1 });
+  async searchHotel(data) {
+    await this.location.selectOption({ label: data.location });
+    await this.hotel.selectOption({ label: data.hotel });
+    await this.roomType.selectOption({ label: data.roomType });
+    await this.numberOfRooms.selectOption({ index: data.numberOfRooms });
+    await this.checkInDate.fill(data.checkIn);
+    await this.checkOutDate.fill(data.checkOut);
+    await this.adultsPerRoom.selectOption({ index: data.adults });
     await this.searchButton.click();
   }
 }

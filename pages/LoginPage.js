@@ -7,7 +7,7 @@
   }
 
   async open() {
-    await this.page.goto('https://adactinhotelapp.com/');
+    await this.page.goto('/');
   }
 
   async login(username, password) {

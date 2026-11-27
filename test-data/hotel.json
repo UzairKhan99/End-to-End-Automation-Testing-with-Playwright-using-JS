@@ -1,0 +1,16 @@
+[
+  {
+    "testName": "Search Sydney hotel",
+    "location": "Sydney",
+    "hotel": "Hotel Creek",
+    "roomType": "Standard",
+    "numberOfRooms": 1,
+    "checkIn": {
+      "daysFromToday": 7
+    },
+    "checkOut": {
+      "stayLength": 1
+    },
+    "adults": 1
+  }
+]

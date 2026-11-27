@@ -1,0 +1,10 @@
+{
+  "firstName": "Test",
+  "lastName": "User",
+  "address": "Karachi Pakistan",
+  "cardNumber": "4111111111111111",
+  "cardType": "VISA",
+  "expiryMonth": "January",
+  "expiryYear": "2027",
+  "cvv": "123"
+}

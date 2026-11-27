@@ -12,15 +12,15 @@ class BookHotelPage {
     this.bookNowButton = page.locator('#book_now');
   }
 
-  async bookHotel() {
-    await this.firstName.fill('Uzair');
-    await this.lastName.fill('Khan');
-    await this.address.fill('Karachi, Pakistan');
-    await this.ccNum.fill('1234567890123456'); // 16 digits required
-    await this.ccType.selectOption({ index: 1 });
-    await this.ccExpMonth.selectOption({ index: 1 });
-    await this.ccExpYear.selectOption({ index: 10 });
-    await this.ccCvv.fill('123');
+  async bookHotel(data) {
+    await this.firstName.fill(data.firstName);
+    await this.lastName.fill(data.lastName);
+    await this.address.fill(data.address);
+    await this.ccNum.fill(data.cardNumber);
+    await this.ccType.selectOption({ label: data.cardType });
+    await this.ccExpMonth.selectOption({ label: data.expiryMonth });
+    await this.ccExpYear.selectOption({ label: data.expiryYear });
+    await this.ccCvv.fill(data.cvv);
     await this.bookNowButton.click();
   }
 }

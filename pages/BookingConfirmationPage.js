@@ -14,11 +14,8 @@ class BookingConfirmationPage {
     await this.myItineraryButton.click();
   }
 
-  async clickLogout() {
-    await this.logoutButton.click({ noWaitAfter: true });
-    await this.page.goto('https://adactinhotelapp.com/Logout.php', {
-      waitUntil: 'commit'
-    });
+  async logout() {
+    await this.logoutButton.click();
   }
 }
 
