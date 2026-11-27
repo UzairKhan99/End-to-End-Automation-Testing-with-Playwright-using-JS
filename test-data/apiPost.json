@@ -1,5 +1,54 @@
 {
-  "title": "Playwright API Testing",
-  "body": "Testing REST API endpoints using Playwright and JavaScript.",
-  "userId": 1
+  "baseURL": "https://jsonplaceholder.typicode.com",
+  "endpoints": {
+    "getPost": "/posts/1",
+    "createPost": "/posts",
+    "updatePost": "/posts/1",
+    "deletePost": "/posts/1",
+    "missingPost": "/posts/9999"
+  },
+  "post": {
+    "title": "Playwright API Testing",
+    "body": "Testing REST API endpoints using Playwright and JavaScript.",
+    "userId": 1
+  },
+  "expected": {
+    "getPost": {
+      "status": 200,
+      "contentType": "application/json",
+      "maxResponseTimeMs": 15000
+    },
+    "createPost": {
+      "status": 201,
+      "contentType": "application/json",
+      "maxResponseTimeMs": 15000
+    },
+    "updatePost": {
+      "status": 200,
+      "contentType": "application/json",
+      "maxResponseTimeMs": 15000
+    },
+    "deletePost": {
+      "status": 200,
+      "contentType": "application/json",
+      "maxResponseTimeMs": 15000
+    },
+    "missingPost": {
+      "status": 404,
+      "contentType": "application/json",
+      "maxResponseTimeMs": 15000
+    }
+  },
+  "schemas": {
+    "post": {
+      "type": "object",
+      "required": ["userId", "id", "title", "body"],
+      "properties": {
+        "userId": { "type": "integer" },
+        "id": { "type": "integer" },
+        "title": { "type": "string" },
+        "body": { "type": "string" }
+      }
+    }
+  }
 }
