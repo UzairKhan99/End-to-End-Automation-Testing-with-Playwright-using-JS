@@ -1,4 +1,6 @@
-﻿class LoginPage {
+const { waitForVisible } = require('../utils/waitUtils.js');
+
+class LoginPage {
   constructor(page) {
     this.page = page;
     this.username = page.locator('#username');
@@ -8,6 +10,7 @@
 
   async open() {
     await this.page.goto('/');
+    await waitForVisible(this.username);
   }
 
   async login(username, password) {
