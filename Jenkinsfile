@@ -20,8 +20,11 @@ pipeline {
 
         stage('Build Docker image') {
             steps {
-                sh 'docker build --tag "$DOCKER_IMAGE_NAME:$BUILD_NUMBER" .'
                 script {
+                    sh '''
+                        docker info
+                        docker build --tag "$DOCKER_IMAGE_NAME:$BUILD_NUMBER" .
+                    '''
                     env.DOCKER_IMAGE_BUILT = 'true'
                 }
             }
@@ -35,6 +38,7 @@ pipeline {
                     passwordVariable: 'ADACTIN_PASSWORD'
                 )]) {
                     sh '''
+                        set -e
                         rm -rf allure-results
                         mkdir -p playwright-report allure-results test-results
                         docker run --rm \
