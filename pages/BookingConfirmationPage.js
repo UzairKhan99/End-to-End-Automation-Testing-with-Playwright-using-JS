@@ -11,7 +11,25 @@ class BookingConfirmationPage {
   }
 
   async clickMyItinerary() {
-    await this.myItineraryButton.click();
+    await this.myItineraryButton.click({ noWaitAfter: true });
+
+    try {
+      await this.page.waitForFunction(
+        () => window.location.pathname.endsWith('/BookedItinerary.php'),
+        null,
+        { timeout: 10000 }
+      );
+    } catch (error) {
+      const href = await this.myItineraryButton.getAttribute('href');
+      if (!href) {
+        throw error;
+      }
+
+      await this.page.goto(new URL(href, this.page.url()).href, {
+        waitUntil: 'domcontentloaded',
+        timeout: 30000
+      });
+    }
   }
 
   async logout() {

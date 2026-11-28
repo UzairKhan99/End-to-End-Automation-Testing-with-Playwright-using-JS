@@ -12,5 +12,19 @@
       "stayLength": 1
     },
     "adults": 1
+  },
+  {
+    "testName": "Search Melbourne hotel",
+    "location": "Melbourne",
+    "hotel": "Hotel Sunshine",
+    "roomType": "Deluxe",
+    "numberOfRooms": 1,
+    "checkIn": {
+      "daysFromToday": 14
+    },
+    "checkOut": {
+      "stayLength": 2
+    },
+    "adults": 1
   }
 ]

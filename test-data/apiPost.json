@@ -4,6 +4,7 @@
     "getPost": "/posts/1",
     "createPost": "/posts",
     "updatePost": "/posts/1",
+    "patchPost": "/posts/1",
     "deletePost": "/posts/1",
     "missingPost": "/posts/9999"
   },
@@ -11,6 +12,9 @@
     "title": "Playwright API Testing",
     "body": "Testing REST API endpoints using Playwright and JavaScript.",
     "userId": 1
+  },
+  "patch": {
+    "title": "Patched Playwright API Test"
   },
   "expected": {
     "getPost": {
@@ -24,6 +28,11 @@
       "maxResponseTimeMs": 15000
     },
     "updatePost": {
+      "status": 200,
+      "contentType": "application/json",
+      "maxResponseTimeMs": 15000
+    },
+    "patchPost": {
       "status": 200,
       "contentType": "application/json",
       "maxResponseTimeMs": 15000
@@ -48,6 +57,14 @@
         "id": { "type": "integer" },
         "title": { "type": "string" },
         "body": { "type": "string" }
+      }
+    },
+    "patchedPost": {
+      "type": "object",
+      "required": ["id", "title"],
+      "properties": {
+        "id": { "type": "integer" },
+        "title": { "type": "string" }
       }
     }
   }

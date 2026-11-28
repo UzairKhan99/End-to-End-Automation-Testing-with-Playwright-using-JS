@@ -81,6 +81,22 @@ test.describe('Posts API Tests', () => {
     expectMatchesSchema(responsePost, apiData.schemas.post);
   });
 
+  test('PATCH - Partially update an existing post', async ({ request }) => {
+    const startedAt = performance.now();
+    const response = await request.patch(apiData.endpoints.patchPost, {
+      data: apiData.patch
+    });
+
+    expectResponseMetadata(response, apiData.expected.patchPost, startedAt);
+
+    const patchedPost = await response.json();
+    expect(patchedPost).toMatchObject({
+      id: 1,
+      ...apiData.patch
+    });
+    expectMatchesSchema(patchedPost, apiData.schemas.patchedPost);
+  });
+
   test('DELETE - Delete a post', async ({ request }) => {
     const startedAt = performance.now();
     const response = await request.delete(apiData.endpoints.deletePost);

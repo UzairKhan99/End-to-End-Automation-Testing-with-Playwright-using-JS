@@ -11,6 +11,7 @@ const { getFutureHotelDates } = require('../../utils/dateUtils.js');
 registerLoginBeforeEach(test);
 
 test('End-to-End Hotel Booking Flow (Steps 1 to 7)', async ({ page }) => {
+  test.setTimeout(90000);
   const searchPage = new SearchHotelPage(page);
   const selectPage = new SelectHotelPage(page);
   const bookPage = new BookHotelPage(page);

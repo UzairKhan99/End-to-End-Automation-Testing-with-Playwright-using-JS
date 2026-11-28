@@ -6,11 +6,11 @@ registerFailureScreenshot(test);
 
 test('Negative Test - Login with invalid username/password', async ({ page }) => {
   const loginPage = new LoginPage(page);
-  const YOUR_USERNAME = 'Ali';
-  const YOUR_PASSWORD = '112';
+  const invalidUsername = 'Ali';
+  const invalidPassword = '112';
 
   await loginPage.open();
-  await loginPage.login(YOUR_USERNAME, YOUR_PASSWORD);
+  await loginPage.login(invalidUsername, invalidPassword);
 
   // 1. Verify user did NOT go to Search Hotel page
   await expect(page).not.toHaveURL(/SearchHotel/i);

@@ -22,14 +22,23 @@ function registerFailureScreenshot(test) {
 }
 
 function registerLoginBeforeEach(test) {
+  let credentials;
+
   registerFailureScreenshot(test);
+
+  test.beforeAll(() => {
+    credentials = getAdactinCredentials();
+  });
 
   test.beforeEach(async ({ page }) => {
     const loginPage = new LoginPage(page);
-    const { username, password } = getAdactinCredentials();
 
     await loginPage.open();
-    await loginPage.login(username, password);
+    await loginPage.login(credentials.username, credentials.password);
+  });
+
+  test.afterAll(() => {
+    credentials = undefined;
   });
 }
 
